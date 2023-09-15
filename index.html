@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Document</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <title>Code Quiz Challenge</title>
   </head>
   <body>
     <div class="container">
       <div class="heading">
         <a id="ViewHighscores;" href="#">View Highscores</a>
-        <span>Time: <span id="timer">60</span></span>
+        <span>Time: <span id="countdown">0</span></span>
       </div>
       <div class="home">
         <h1>Code Quiz Challenge</h1>
@@ -21,6 +21,40 @@
         </p>
         <button id="StartButton">Start Quiz</button>
       </div>
+      <div class="quiz">
+        <h2 class="question">Question 1</h2>
+        <div class="answer choices">
+          <button class="answer-btn" data-correct="correct">
+            1. First Choice
+          </button>
+          <button class="answer-btn" data-correct="correct">
+            2. Second Choice
+          </button>
+          <button class="answer-btn" data-correct="correct">
+            3. Third Choice
+          </button>
+          <button class="answer-btn" data-correct="correct">
+            4. Fourth Choice
+          </button>
+        </div>
+      </div>
+      <div class="answer results">
+        <p id="results">Correct!</p>
+      </div>
+      <div class="final score">
+        <h2>All Done!</h2>
+        <p>Your final score is: <span id="score">0</span>.</p>
+        <p>Enter initials:</p>
+        <input type="text" id="initials" />
+        <button id="submit-score">Submit</button>
+      </div>
+      <div class="highscores">
+        <h1>Highscores</h1>
+        <ol id="highscore list"></ol>
+        <button>Go Back</button>
+        <button>Clear Highscores</button>
+      </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
