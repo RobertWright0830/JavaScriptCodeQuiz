@@ -2,6 +2,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+button {
+  background-color: purple;
+  color: white;
+  border-radius: 5px;
+
+}
+
+button:hover {
+  opacity: 0.5;
+  border-color: rgb(82, 163, 190);
+  cursor: pointer;
+  border-width: 2px;
+}
+
 .heading {
   display: flex;
   justify-content: space-between;
@@ -11,11 +25,79 @@ body {
 .home {
   text-align: center;
   margin: auto;
-  width: 20%;
+  width: 30%;
 }
 
-#StartButton {
+.quiz {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+  display: none;
+}
+
+.answer-results {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+  display: none;
+}
+
+.highscores {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+  display: none;
+}
+
+.initials {
+  display: flex;
+  text-align: left;
+  align-items: center;
+ 
+}
+
+#initials {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+#initials:hover {
+  border-width: 2px;
+  border-color: rgb(82, 163, 190);
+}
+
+.final_score {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+  display: none;
+}
+
+.answer-btn {
+  display: block;
+  /* background-color: purple;
+  color: white;
+  border-radius: 5px; */
+  margin: 2px;
+}
+
+.answer-results {
+  color: #B0B0B0;
+  font-style: italic;
+  margin-top: 10px;
+  border-top: 3px solid;
+  
+
+}
+
+/* #StartButton {
   background-color: purple;
   color: white;
   border-radius: 5px;
 }
+
+#submit-score {
+  background-color: purple;
+  color: white;
+  border-radius: 5px;
+} */

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <link rel="stylesheet" href="styles.css" />
     <title>Code Quiz Challenge</title>
   </head>
   <body>
@@ -12,7 +12,7 @@
         <a id="ViewHighscores;" href="#">View Highscores</a>
         <span>Time: <span id="countdown">0</span></span>
       </div>
-      <div class="home">
+      <div class="home" id="startScreen">
         <h1>Code Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
@@ -21,9 +21,9 @@
         </p>
         <button id="StartButton">Start Quiz</button>
       </div>
-      <div class="quiz">
-        <h2 class="question">Question 1</h2>
-        <div class="answer choices">
+      <div class="quiz" id="startQuiz">
+        <h2 class="question" id="questionId">Question 1</h2>
+        <div class="answerchoices">
           <button class="answer-btn" data-correct="correct">
             1. First Choice
           </button>
@@ -37,18 +37,22 @@
             4. Fourth Choice
           </button>
         </div>
+
+        
       </div>
-      <div class="answer results">
+      <div class="answer-results" id="startAnswerResults">
         <p id="results">Correct!</p>
       </div>
-      <div class="final score">
-        <h2>All Done!</h2>
+      <div class="final_score" id="finalScore">
+        <h2>All done!</h2>
         <p>Your final score is: <span id="score">0</span>.</p>
-        <p>Enter initials:</p>
-        <input type="text" id="initials" />
-        <button id="submit-score">Submit</button>
+        <div class="initials">
+          <p>Enter initials: </p>
+          <input type="text" id="initials" />
+          <button id="submit-score">Submit</button>
+        </div>  
       </div>
-      <div class="highscores">
+      <div class="highscores" id="highscoresScreen">
         <h1>Highscores</h1>
         <ol id="highscore list"></ol>
         <button>Go Back</button>
