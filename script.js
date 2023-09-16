@@ -1,59 +1,54 @@
-//bring in score to your final score is
 //store initials to memory
-//set timer to also be a trigger to stop the quiz instead of just the number of questions
-//adjust timer 10 seconds for a wrong answer
-//get rid of gray bar
-//set up highscores to be display:none initially and changed to block after event key on final score submit button
+//set up highscores screen
+//set up clear highscores function
 //change up position of correct answers and test
 //set up random order of questions and random order of answers within the answers
 //get actual javascript questions to add
-//set up highscores screen
-//set up clear highscores function
-
-
-
-
 
 
 var startButton = document.getElementById("StartButton");
 var startScreenEl = document.getElementById("startScreen");
 var startQuizEl = document.getElementById("startQuiz");
 var answerButtons = document.querySelectorAll(".answer-btn");
-var result = document.querySelector(".results");
+var result = document.querySelector(".answer-results");
 var resultEl = document.getElementById('startAnswerResults');
 var countdownEl = document.getElementById("countdown");
 var finalScoreScreenEl = document.getElementById("finalScore");
 var submitButton = document.getElementById("submit-score");
 var highscoresEl = document.getElementById('highscoresScreen');
-
+var showScoreEl = document.getElementById('score');
+var goBackButtonEl = document.getElementById("goBack");
+var gameoverEl = document.getElementById("gameover-msg");
+var initialsEl = document.getElementById("initials");
 var currentQuestion = 0;
 var score = 0;
+var timeLeft = 60;
 
 var questionsArray = [{
-  question: "Question #1 will be listed here.",
+  question: "4+4=",
   answers: [
-      { text: "True", correct: true },
-      { text: "False", correct: false },
-      { text: "False", correct: false },
-      { text: "False", correct: false },
+      { text: "8", correct: true },
+      { text: "1", correct: false },
+      { text: "9", correct: false },
+      { text: "7", correct: false },
   ],
 },
 {
-  question: "Question #2 will be listed here.",
+  question: "5+4=",
   answers: [
-      { text: "1", correct: true },
-      { text: "2", correct: false },
-      { text: "3", correct: false },
-      { text: "4", correct: false },
+      { text: "9", correct: true },
+      { text: "10", correct: false },
+      { text: "8", correct: false },
+      { text: "7", correct: false },
   ],
 },
 {
-  question: "Question #3 will be listed here.",
+  question: "11+4",
   answers: [
-      { text: "1", correct: true },
-      { text: "2", correct: false },
-      { text: "3", correct: false },
-      { text: "4", correct: false },
+      { text: "15", correct: true },
+      { text: "14", correct: false },
+      { text: "13", correct: false },
+      { text: "16", correct: false },
   ],
 },
 {
@@ -121,27 +116,34 @@ var questionsArray = [{
 },
 ];
 
+function homeScreen() {
+  startScreenEl.style.display = "block";
+  highscoresEl.style.display = 'none';
+}
 
 function startGame() {
 
   startScreenEl.style.display = "none";
   startQuiz.style.display = "block";
+  currentQuestion = 0;
+  score = 0;
 
     showQuestion();
     countdown();
 }
 
 function showQuestion() {
-  // resultEl.style.display = "none";
-  if (currentQuestion < questionsArray.length) {
-      var question = questionsArray[currentQuestion];
+  resultEl.style.display = 'none';
+  
+  if ((currentQuestion < questionsArray.length)) {
+        var question = questionsArray[currentQuestion];
       document.getElementById("questionId").textContent = question.question;
       answerButtons.forEach((button, index) => {
           button.textContent = question.answers[index].text;
           button.dataset.correct = question.answers[index].correct;
       });
-  } else {
-      endgame();
+  } else { 
+      endgame("arrayend");
   }
 }
 
@@ -150,28 +152,40 @@ function selectedAnswer(event) {
   var CorrectAnswer = selectedButton.dataset.correct === "true";
   if (CorrectAnswer) {
       score++;
-      resultEl.style.display = "block";
+
       console.log(score);
-  }
+  }  
+  
   showResult(CorrectAnswer);
 }
 
 function showResult(CorrectAnswer) {
   if (CorrectAnswer) {
-      results.textContent = "Correct!";
+      result.textContent = "Correct!";
   } else {
-      results.textContent = "Wrong!";
+      result.textContent = "Wrong!";
+      timeLeft -= 10;
   }
+  resultEl.style.display = "block";
   setTimeout(() => {
-      results.textContent = "";
+      result.textContent = "";
       currentQuestion++;
       showQuestion();
   }, 1000);
 }
 
-function endgame() {
+function endgame(reason) {
+if (reason === "timeup") {
+  gameoverEl.textContent = "Time is up!";
+} else if (reason === "arrayend") {
+  gameoverEl.textContent = "All done!";
+}
+
+console.log (reason);
+  
 finalScoreScreenEl.style.display = "block";
-startQuiz.style.display = "none";
+startQuizEl.style.display = "none";
+showScoreEl.textContent = score;
 
 
 }
@@ -179,16 +193,16 @@ startQuiz.style.display = "none";
 function highscoreList (){
 highscoresEl.style.display = 'block';
 finalScoreScreenEl.style.display = "none";
+var initials = initialsEl.value;
+console.log(initials);
+///add local storage code
+
 
 }
 
-// function displayMessage(){
-
-// }
-
 function countdown() {
 // Timer that counts down from 60
-    var timeLeft = 5;
+    timeLeft = 60;
   
     // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     var timeInterval = setInterval(function () {
@@ -201,6 +215,7 @@ function countdown() {
       } else {
         // Once `timeLeft` gets to 0, set `timerEl` to an empty string
         countdownEl.textContent = '0';
+        endgame("timeup");
         // Use `clearInterval()` to stop the timer
         clearInterval(timeInterval);
         // Call the `displayMessage()` function
@@ -214,10 +229,4 @@ answerButtons.forEach((button) => {
   button.addEventListener("click", selectedAnswer);
 });
 submitButton.addEventListener("click", highscoreList);
-
-// consider an event listener for a wrong answer
-// document.getElementById("wrongAnswer").addEventListener("click", function () {
-  
-//   timerValue -= 10;
-//   updateTimer();
-// });
+goBackButtonEl.addEventListener("click", homeScreen);
