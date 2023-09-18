@@ -1,60 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Header Section -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Code Quiz Challenge</title>
   </head>
+<!-- Body Section -->
   <body>
-    <div class="container">
+<!-- Main container -->
+    <div>
+<!-- Heading Section -->
       <div class="heading">
-        <a onclick="highscoreListFunction();"href="#">View Highscores</a>
+        <!-- View Highscores link -->
+        <a onclick="displayHighscoreListFunction();"href="#">View Highscores</a>
+        <!-- Timer countdown -->
         <span>Time: <span id="countdown">0</span></span>
       </div>
-      <div class="home" id="startScreen">
+      <!-- Home Screen -->
+      <div class="home" id="start_screen">
+        <!-- Quiz title and instructions -->
         <h1>Code Quiz Challenge</h1>
         <p>
           Try to answer the following code-related questions within the time
           limit. Keep in mind that incorrect answers will penalize your
           score/time by ten seconds!
         </p>
+        <!-- Start Quiz Button -->
         <button id="start_button">Start Quiz</button>
       </div>
-      <div class="quiz" id="startQuiz">
-        <h2 class="question" id="questionId">Question 1</h2>
-        <div class="answerchoices">
-          <button class="answer-btn" data-correct="correct">
+      <!-- Question and Answer buttons -->
+      <div class="quiz" id="start_quiz">
+        <h2 class="question" id="question_id">Question 1</h2>
+        <div>
+          <button class="answer_btn" data-correct="correct">
             1. First Choice
           </button>
-          <button class="answer-btn" data-correct="correct">
+          <button class="answer_btn" data-correct="correct">
             2. Second Choice
           </button>
-          <button class="answer-btn" data-correct="correct">
+          <button class="answer_btn" data-correct="correct">
             3. Third Choice
           </button>
-          <button class="answer-btn" data-correct="correct">
+          <button class="answer_btn" data-correct="correct">
             4. Fourth Choice
           </button>
         </div>
-
-        
+<!-- Answer Results         -->
       </div>
-      <div class="answer-results" id="startAnswerResults">
+      <div class="answer_results" id="startAnswerResults">
+        <!-- Result Message -->
         <p id="results">Correct!</p>
       </div>
+      <!-- Final Score Screen -->
       <div class="final_score" id="finalScore">
+        <!-- Game over message and final score -->
         <h2 id="gameover-msg">All done!</h2>
         <p>Your final score is: <span id="score">0</span>.</p>
+        <!-- Initials input and submit button -->
         <div class="initials">
           <p>Enter initials: </p>
           <input type="text" id="initialsInput" />
           <button id="submit-score">Submit</button>
         </div>  
       </div>
+      <!-- Highscore Screen -->
       <div class="highscore_screen" id="highscores">
+        <!-- Highscore title and list -->
         <h1>Highscores</h1>
         <ol id="highScoresList"></ol> 
+        <!-- Go Back and Clear Highscores buttons -->
         <button id="go_to_start_button">Go Back</button>
         <button id="clear_highscores_button">Clear Highscores</button>
       </div>

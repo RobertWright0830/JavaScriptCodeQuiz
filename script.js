@@ -1,12 +1,11 @@
-//cleanup code
 //add readme
-//add comments
 
+//DOM element references
 var startButton = document.getElementById("start_button");
-var startScreenEl = document.getElementById("startScreen");
-var startQuizEl = document.getElementById("startQuiz");
-var answerButtons = document.querySelectorAll(".answer-btn");
-var result = document.querySelector(".answer-results");
+var startScreenEl = document.getElementById("start_screen");
+var startQuizEl = document.getElementById("start_quiz");
+var answerButtons = document.querySelectorAll(".answer_btn");
+var result = document.querySelector(".answer_results");
 var resultEl = document.getElementById("startAnswerResults");
 var countdownEl = document.getElementById("countdown");
 var finalScoreScreenEl = document.getElementById("finalScore");
@@ -18,12 +17,14 @@ var clearHighScoresButtonEl = document.getElementById("clear_highscores_button")
 var gameoverEl = document.getElementById("gameover-msg");
 var highScoresListEl = document.getElementById("highScoresList");
 
+// Initialize variables
 var currentQuestion = 0;
 var score = 0;
 var timeLeft = 60;
 var highScores = [];
 var countdownInterval;
 
+// Array of quiz questions and answers
 var questionsArray = [
   {
     question: "What is JavaScript primarily used for?",
@@ -120,6 +121,7 @@ var questionsArray = [
   },
 ];
 
+//Function to shuffle an array
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -130,13 +132,15 @@ function shuffleArray(array) {
 shuffleArray(questionsArray);
 questionsArray.forEach((question) => shuffleArray(question.answers));
 
-function homeScreen() {
+//Function to display the home screen
+function displayHomescreen() {
   startScreenEl.style.display = "block";
   highscoresEl.style.display = "none";
   countdownEl.textContent = "60";
 }
 
-function startGame() {
+//Function to start the quiz
+function startQuiz() {
   startScreenEl.style.display = "none";
   startQuizEl.style.display = "block";
   currentQuestion = 0;
@@ -146,12 +150,13 @@ function startGame() {
   countdown();
 }
 
+//Function to display a question
 function showQuestion() {
   resultEl.style.display = "none";
 
   if (currentQuestion < questionsArray.length) {
     var question = questionsArray[currentQuestion];
-    document.getElementById("questionId").textContent = question.question;
+    document.getElementById("question_id").textContent = question.question;
     answerButtons.forEach((button, index) => {
       button.textContent = question.answers[index].text;
       button.dataset.correct = question.answers[index].correct;
@@ -161,18 +166,18 @@ function showQuestion() {
   }
 }
 
-function selectedAnswer(event) {
+//Function to review user's answer
+function reviewAnswer(event) {
   var selectedButton = event.target;
   var CorrectAnswer = selectedButton.dataset.correct === "true";
   if (CorrectAnswer) {
     score++;
-
-    console.log(score);
   }
 
   showResult(CorrectAnswer);
 }
 
+//Function to display the result of an answer
 function showResult(CorrectAnswer) {
   if (CorrectAnswer) {
     result.textContent = "Correct!";
@@ -188,6 +193,7 @@ function showResult(CorrectAnswer) {
   }, 1000);
 }
 
+//Function to end the game
 function endgame(reason) {
   if (reason === "timeup") {
     gameoverEl.textContent = "Time is up!";
@@ -201,39 +207,41 @@ function endgame(reason) {
   showScoreEl.textContent = score;
 }
 
+//Function to save the highscore
 function saveHighscoreFunction() {
   var initials = document.getElementById("initialsInput").value;
-  var entry = { score, initials };
+  var highscoreEntry = { score, initials };
   var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
-  console.log(highScores);
-  highScores.push(entry);
+  highScores.push(highscoreEntry);
   highScores.sort((a, b) => b.score - a.score);
-  console.log(highScores);
-
+  
   localStorage.setItem("highscores", JSON.stringify(highScores));
 
-  highscoreListFunction();
+  displayHighscoreListFunction();
 }
 
+//Function to clear the highscores
 function clearHighScoreFunction() {
   localStorage.removeItem("highscores");
-  highscoreListFunction();
+  displayHighscoreListFunction();
 }
 
-function highscoreListFunction() {
+//Function to display the highscores screen
+function displayHighscoreListFunction() {
   startScreenEl.style.display = "none";
   startQuizEl.style.display = "none";
   highscoresEl.style.display = "block";
   finalScoreScreenEl.style.display = "none";
   var highScores = JSON.parse(localStorage.getItem("highscores")) || [];
   highScoresListEl.innerHTML = "";
-  highScores.forEach((entry, index) => {
+  highScores.forEach((highscoreEntry, index) => {
     var li = document.createElement("li");
-    li.textContent = ` ${entry.initials} - ${entry.score}`;
+    li.textContent = ` ${highscoreEntry.initials} - ${highscoreEntry.score}`;
     highScoresListEl.appendChild(li);
   });
 }
 
+//Function to start the countdown timer
 function countdown() {
   timeLeft = 60;
 
@@ -250,10 +258,11 @@ function countdown() {
   return countdownInterval;
 }
 
-startButton.addEventListener("click", startGame);
+// Event listeners for buttons and answer selections
+startButton.addEventListener("click", startQuiz);
 answerButtons.forEach((button) => {
-  button.addEventListener("click", selectedAnswer);
+  button.addEventListener("click", reviewAnswer);
 });
 submitButton.addEventListener("click", saveHighscoreFunction);
 clearHighScoresButtonEl.addEventListener("click", clearHighScoreFunction);
-goBackButtonEl.addEventListener("click", homeScreen);
+goBackButtonEl.addEventListener("click", displayHomescreen);
