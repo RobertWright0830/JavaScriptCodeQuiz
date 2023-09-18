@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="heading">
-        <a id="ViewHighscores;" href="#">View Highscores</a>
+        <a onclick="highscoreListFunction();"href="#">View Highscores</a>
         <span>Time: <span id="countdown">0</span></span>
       </div>
       <div class="home" id="startScreen">
@@ -19,7 +19,7 @@
           limit. Keep in mind that incorrect answers will penalize your
           score/time by ten seconds!
         </p>
-        <button id="StartButton">Start Quiz</button>
+        <button id="start_button">Start Quiz</button>
       </div>
       <div class="quiz" id="startQuiz">
         <h2 class="question" id="questionId">Question 1</h2>
@@ -48,15 +48,15 @@
         <p>Your final score is: <span id="score">0</span>.</p>
         <div class="initials">
           <p>Enter initials: </p>
-          <input type="text" id="initials" />
+          <input type="text" id="initialsInput" />
           <button id="submit-score">Submit</button>
         </div>  
       </div>
-      <div class="highscores" id="highscoresScreen">
+      <div class="highscore_screen" id="highscores">
         <h1>Highscores</h1>
-        <ol id="highscore list"></ol>
-        <button id="goBack">Go Back</button>
-        <button>Clear Highscores</button>
+        <ol id="highScoresList"></ol> 
+        <button id="go_to_start_button">Go Back</button>
+        <button id="clear_highscores_button">Clear Highscores</button>
       </div>
     </div>
     <script src="script.js"></script>

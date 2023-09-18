@@ -46,11 +46,16 @@ button:hover {
   display: none;
 }
 
-.highscores {
+.highscore_screen {
   text-align: left;
+  font-weight: bold;
   margin: auto;
   width: 40%;
   display: none;
+}
+
+ol {
+  background-color: plum;
 }
 
 .initials {
